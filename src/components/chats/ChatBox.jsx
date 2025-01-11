@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { collection, query, where, orderBy, addDoc, getDocs, onSnapshot, doc, setDoc, updateDoc, limit } from 'firebase/firestore';
 import { db } from '../../config/firebase';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/Authcontext';
 import MessageList from './MessageList';
 import toast from 'react-hot-toast';
 
