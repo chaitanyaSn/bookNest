@@ -13,7 +13,7 @@ function Navbar() {
     try {
       await logout();
       toast.success('Logged out successfully');
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);
       toast.error('Failed to log out');
@@ -21,7 +21,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow">
+    <nav className="bg-white shadow fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -46,7 +46,7 @@ function Navbar() {
                       <img
                         src={user.photoURL}
                         alt="Profile"
-                        className="h-8 w-8 rounded-full"
+                        className="h-10 w-10 rounded-full"
                       />
                     ) : (
                       <UserCircleIcon className="h-8 w-8 text-gray-400" />
