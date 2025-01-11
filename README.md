@@ -1,8 +1,20 @@
-# React + Vite
+📚 feat: Implement BookList component with user filtering and search functionality
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🎯 Key Features:
+- 🔄 Real-time book data fetching from Firestore
+- 🚫 User-specific filtering (excludes logged-in user's books)
+- 📅 Year filter (1st to 4th year)
+- 🎓 Branch filter (CS, IT, Mechanical, Chemical)
+- 📱 Responsive grid layout for books display 
+- ⚡ Loading spinner and error states
 
-Currently, two official plugins are available:
+✨ Details:
+- Create responsive book listing page with grid layout
+- Add filters for academic year and branch selection
+- Implement Firebase Firestore integration
+- Filter out current user's books from listing
+- Add loading states and error handling
+- Style using Tailwind CSS with responsive design
+- Include empty state handling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛠️ Tech Stack: React, Firebase, Tailwind CSS
