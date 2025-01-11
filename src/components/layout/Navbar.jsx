@@ -1,18 +1,22 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/Authcontext';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 function Navbar() {
   const { user, logout } = useAuth();
-  console.log(user)
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logout();
+      toast.success('Logged out successfully');
+      navigate('/login');
     } catch (error) {
       console.error('Error logging out:', error);
+      toast.error('Failed to log out');
     }
   };
 
@@ -40,7 +44,7 @@ function Navbar() {
                   <Menu.Button className="flex items-center">
                     {user.photoURL ? (
                       <img
-                        src={user.photoURl}
+                        src={user.photoURL}
                         alt="Profile"
                         className="h-8 w-8 rounded-full"
                       />
