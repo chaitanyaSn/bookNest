@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
-import { AuthProvider } from "./context/Authcontext";
 import Login from "./components/auth/Login";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import BookForm from "./components/books/BookForm";
@@ -12,7 +11,7 @@ import LandingPage from "./components/pages/LandingPage";
 
 function App() {
   return (
-    <AuthProvider>
+  
       <div className="min-h-screen bg-gray-200 pt-16">
         <Navbar />
         <main className="container mx-auto px-4 py-8">
@@ -62,7 +61,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </AuthProvider>
+  
   );
 }
 

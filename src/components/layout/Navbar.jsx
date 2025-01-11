@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+// src/components/layout/Navbar.jsx
 import { useAuth } from '../../context/AuthContext';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
