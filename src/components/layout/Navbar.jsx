@@ -26,7 +26,7 @@ function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-blue-600">BookNest</span>
+              <span className="text-xl font-bold text-blue-500">BookNest</span>
             </Link>
           </div>
 
@@ -35,7 +35,7 @@ function Navbar() {
               <div className="flex items-center space-x-4">
                 <Link
                   to="/sell"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
+                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-cyan-400"
                 >
                   Sell Book
                 </Link>

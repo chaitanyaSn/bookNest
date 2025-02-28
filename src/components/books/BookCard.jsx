@@ -27,7 +27,7 @@ function BookCard({ book }) {
         {user && user.uid !== book.userId && (
           <Link
             to={`/chat/${book.userId}`}
-            className="mt-4 block w-full text-center bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+            className="mt-4 block w-full text-center bg-gradient-to-r from-blue-400 to-cyan-400 text-white py-2 px-4 rounded-md hover:bg-blue-700"
           >
             Contact Seller
           </Link>

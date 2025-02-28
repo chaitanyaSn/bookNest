@@ -15,7 +15,7 @@ function App() {
   <AuthProvider>
 
  
-      <div className="min-h-screen bg-gray-200 pt-16">
+      <div className="min-h-screen bg-gradient-to-r from-blue-200 to-cyan-200 pt-16">
         <Navbar />
         <main className="container mx-auto px-4 py-8">
           <Routes>

@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { collection, query, where, getDocs, orderBy, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useAuth } from '../../context/Authcontext';
-import ChatList from '../chats/ChatList';
+
 import BookCard from '../books/BookCard';
 import toast from 'react-hot-toast';
 import { deleteFromCloudinary } from '../utils/cloudinary';
+import ChatList from '../chats/ChatList';
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('listings');
@@ -62,15 +63,20 @@ function Dashboard() {
       // Find the book to get image public IDs
       const book = userBooks.find(b => b.id === bookId);
       
-      // Delete the book document from Firestore
+      // Delete the book document from Firestore first
       await deleteDoc(doc(db, 'books', bookId));
       
-      // Delete images from Cloudinary
-      if (book.imagePublicIds) {
-        const deletePromises = book.imagePublicIds.map(publicId => 
-          deleteFromCloudinary(publicId)
-        );
-        await Promise.all(deletePromises);
+      // Try to delete images from Cloudinary, but don't block the book deletion
+      if (book.imagePublicIds && book.imagePublicIds.length > 0) {
+        try {
+          const deletePromises = book.imagePublicIds.map(publicId => 
+            deleteFromCloudinary(publicId)
+          );
+          await Promise.all(deletePromises);
+        } catch (cloudinaryError) {
+          console.error('Error deleting images from Cloudinary:', cloudinaryError);
+          // Don't throw the error, just log it
+        }
       }
       
       // Update local state
@@ -141,7 +147,7 @@ function Dashboard() {
       );
     }
 
-    return <ChatList />;
+    return <ChatList/>;
   };
 
   return (

@@ -57,16 +57,25 @@ export const optimizeImage = (url, options = {}) => {
 export const deleteFromCloudinary = async (publicId) => {
   try {
     const timestamp = new Date().getTime();
-    const formData = new FormData();
-    formData.append('public_id', publicId);
-    formData.append('timestamp', timestamp);
-    formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY);
+    // Create signature
+    const apiSecret = import.meta.env.VITE_CLOUDINARY_API_SECRET;
+    const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+    
+    const params = {
+      public_id: publicId,
+      timestamp: timestamp,
+      api_key: apiKey
+    };
 
+    // Make the request
     const response = await fetch(
       `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/destroy`,
       {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params)
       }
     );
 
