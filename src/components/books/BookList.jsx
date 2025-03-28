@@ -3,7 +3,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useAuth } from '../../context/Authcontext';
 import BookCard from './BookCard';
-
+import { FaFaceSadTear } from "react-icons/fa6";
 function BookList() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -110,8 +110,10 @@ function BookList() {
             <BookCard key={book.id} book={book} />
           ))
         ) : (
-          <div className="col-span-full text-center py-10 text-gray-500">
-            No books found matching your criteria.
+          <div className="col-span-full text-center py-10 font-bold text-gray-500 text-lg flex flex-col items-center justify-center gap-8">
+        
+            No books found matching your criteria....
+            <FaFaceSadTear className='animate-bounce' size={80}/>
           </div>
         )}
       </div>

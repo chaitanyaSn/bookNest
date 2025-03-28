@@ -4,8 +4,10 @@ import { useAuth } from '../../context/Authcontext';
 import { Menu, Transition } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
-import { FaComments } from "react-icons/fa";
-
+import { FaPaperPlane } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
+import { IoBookSharp } from "react-icons/io5";
+import { motion } from 'framer-motion'
 function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -26,14 +28,62 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-blue-500">BookNest</span>
-            </Link>
+          <Link to="/" className="flex items-center">
+  <motion.span 
+    initial={{ scale: 1 }}
+    whileHover={{ scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+    className="flex items-center"
+  >
+    {/* Book icon */}
+    <motion.div
+      animate={{
+        rotate: [0, 5, -5, 0],
+        y: [0, -5, 5, 0]
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="mr-2"
+    >
+      <svg 
+        className="h-8 w-8 text-blue-500" 
+        fill="currentColor" 
+        viewBox="0 0 20 20"
+      >
+        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+      </svg>
+    </motion.div>
+    
+    {/* Text with gradient and animation */}
+    <motion.span 
+      className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500"
+      animate={{
+        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        repeatType: "reverse"
+      }}
+      style={{
+        backgroundSize: '200% 200%'
+      }}
+    >
+      BookNest
+    </motion.span>
+    
+    
+  </motion.span>
+</Link>
           </div>
 
           <div className="flex items-center">
             {user ? (
               <div className="flex items-center space-x-4">
+              
                 <Link
                   to="/sell"
                   className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-cyan-400"
@@ -45,7 +95,7 @@ function Navbar() {
                   className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-cyan-400"
                   title="Messages"
                 >
-                  <FaComments />
+                 <FaPaperPlane size={18} />
                 </Link>
 
                 <Menu as="div" className="relative">
@@ -78,9 +128,11 @@ function Navbar() {
                               to="/dashboard"
                               className={`${
                                 active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
+                              } block px-4 py-2 text-md text-gray-700`}
                             >
-                              Your Books
+                              <div className="flex items-center justify-between">
+                              <span>Your Books</span> <IoBookSharp size={18} />
+                              </div>
                             </Link>
                           )}
                         </Menu.Item>
@@ -90,9 +142,12 @@ function Navbar() {
                               onClick={handleLogout}
                               className={`${
                                 active ? 'bg-gray-100' : ''
-                              } block w-full text-left px-4 py-2 text-sm text-gray-700`}
+                              } block w-full text-left px-4 py-2 text-md text-gray-700`}
                             >
-                              Sign out
+                              <div className="flex items-center justify-between">
+                              <span>Sign out</span> <FaSignOutAlt size={18} />
+                              </div>
+                            
                             </button>
                           )}
                         </Menu.Item>
@@ -104,7 +159,7 @@ function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="px-4 py-2 rounded-md text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Sign in
               </Link>

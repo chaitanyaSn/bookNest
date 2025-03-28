@@ -190,7 +190,7 @@ function BookForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Images (Max 3)</label>
+          <label className="block text-sm font-medium text-gray-700">Images</label>
           <input
             type="file"
             accept="image/*"
