@@ -9,6 +9,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import ChatBox from "./components/chats/ChatBox";
 import EditBook from "./components/books/EditBook";
 import LandingPage from "./components/pages/LandingPage";
+import ChatList from './components/chats/ChatList';
 
 function App() {
   return (
@@ -61,6 +62,11 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/messages" element={
+                <ProtectedRoute>
+                  <ChatList />
+                </ProtectedRoute>
+              } />
           </Routes>
         </main>
       </div>

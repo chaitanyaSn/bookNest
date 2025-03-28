@@ -7,10 +7,8 @@ import { useAuth } from '../../context/Authcontext';
 import BookCard from '../books/BookCard';
 import toast from 'react-hot-toast';
 import { deleteFromCloudinary } from '../utils/cloudinary';
-import ChatList from '../chats/ChatList';
 
 function Dashboard() {
-  const [activeTab, setActiveTab] = useState('listings');
   const [userBooks, setUserBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -47,12 +45,10 @@ function Dashboard() {
       }
     };
 
-    if (activeTab === 'listings') {
-      fetchUserBooks();
-      const interval = setInterval(fetchUserBooks, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [user, activeTab]);
+    fetchUserBooks();
+    const interval = setInterval(fetchUserBooks, 5000);
+    return () => clearInterval(interval);
+  }, [user]);
 
   const handleDeleteBook = async (bookId) => {
     if (!window.confirm('Are you sure you want to delete this listing?')) {
@@ -88,17 +84,9 @@ function Dashboard() {
     }
   };
 
-  const renderContent = () => {
-    if (activeTab === 'listings') {
-      if (loading) {
-        return (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-          </div>
-        );
-      }
-
-      return (
+  return (
+    <div className="max-w-4xl mx-auto">
+      <div className="bg-white rounded-lg shadow p-6">
         <div>
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold">Your Listed Books</h2>
@@ -110,7 +98,11 @@ function Dashboard() {
             </Link>
           </div>
 
-          {userBooks.length > 0 ? (
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+            </div>
+          ) : userBooks.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {userBooks.map(book => (
                 <div key={book.id} className="relative">
@@ -144,43 +136,6 @@ function Dashboard() {
             </div>
           )}
         </div>
-      );
-    }
-
-    return <ChatList/>;
-  };
-
-  return (
-    <div className="max-w-4xl mx-auto">
-      {/* Tabs */}
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="-mb-px flex space-x-8">
-          <button
-            onClick={() => setActiveTab('listings')}
-            className={`py-4 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'listings'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Your Listings
-          </button>
-          <button
-            onClick={() => setActiveTab('messages')}
-            className={`py-4 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'messages'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Messages
-          </button>
-        </nav>
-      </div>
-
-      {/* Content */}
-      <div className="bg-white rounded-lg shadow p-6">
-        {renderContent()}
       </div>
     </div>
   );

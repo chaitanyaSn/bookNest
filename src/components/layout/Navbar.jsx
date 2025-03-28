@@ -4,6 +4,7 @@ import { useAuth } from '../../context/Authcontext';
 import { Menu, Transition } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { FaComments } from "react-icons/fa";
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -39,6 +40,13 @@ function Navbar() {
                 >
                   Sell Book
                 </Link>
+                <Link
+                  to="/messages"
+                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-cyan-400"
+                  title="Messages"
+                >
+                  <FaComments />
+                </Link>
 
                 <Menu as="div" className="relative">
                   <Menu.Button className="flex items-center">
@@ -72,7 +80,7 @@ function Navbar() {
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
                             >
-                              Dashboard
+                              Your Books
                             </Link>
                           )}
                         </Menu.Item>
