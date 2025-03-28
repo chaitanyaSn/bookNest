@@ -10,6 +10,31 @@ function ChatList() {
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Function to get initials from name
+  const getInitials = (name) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  // Function to get a consistent color based on name
+  const getAvatarColor = (name) => {
+    const colors = [
+      'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 
+      'bg-red-500', 'bg-purple-500', 'bg-pink-500',
+      'bg-indigo-500', 'bg-teal-500'
+    ];
+    
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return colors[Math.abs(hash) % colors.length];
+  };
+
   useEffect(() => {
     const fetchChats = async () => {
       if (!user) return;
@@ -81,19 +106,31 @@ function ChatList() {
               to={`/chat/${chat.otherUserId}`}
               className="block bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"
             >
-              <div className="flex justify-between items-start">
-                <div className="space-y-1">
-                  <p className="font-medium text-gray-900">{chat.bookTitle}</p>
-                  <p className="text-sm text-gray-600">
-                    with {chat.otherUserName}
-                  </p>
-                  <p className="text-sm text-gray-500 truncate">
-                    {chat.lastMessage}
-                  </p>
+              <div className="flex items-center space-x-4">
+                {/* Avatar */}
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full ${getAvatarColor(chat.otherUserName)} flex items-center justify-center`}>
+                  <span className="text-white text-lg font-medium">
+                    {getInitials(chat.otherUserName)}
+                  </span>
                 </div>
-                <p className="text-xs text-gray-500">
-                  {new Date(chat.timestamp).toLocaleDateString()}
-                </p>
+
+                {/* Chat Info */}
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-1">
+                      <p className="font-medium text-gray-900">{chat.bookTitle}</p>
+                      <p className="text-sm text-gray-600">
+                        with {chat.otherUserName}
+                      </p>
+                      <p className="text-sm text-gray-500 truncate">
+                        {chat.lastMessage}
+                      </p>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      {new Date(chat.timestamp).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
               </div>
             </Link>
           ))}
