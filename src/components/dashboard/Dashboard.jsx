@@ -90,12 +90,6 @@ function Dashboard() {
         <div>
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold">Your Listed Books</h2>
-            <Link
-              to="/sell"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-            >
-              List New Book
-            </Link>
           </div>
 
           {loading ? (
@@ -129,9 +123,9 @@ function Dashboard() {
               <p className="text-gray-500 mb-4">You haven't listed any books yet.</p>
               <Link
                 to="/sell"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="inline-flex items-center text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 px-4 py-2 rounded-md"
               >
-                List Your First Book
+                List Your Book
               </Link>
             </div>
           )}

@@ -59,7 +59,7 @@ function Navbar() {
     
     {/* Text with gradient and animation */}
     <motion.span 
-      className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500"
+      className="sm:text-3xl text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-500"
       animate={{
         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
       }}
@@ -86,9 +86,10 @@ function Navbar() {
               
                 <Link
                   to="/sell"
-                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-cyan-400"
+                  className="bg-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-cyan-400 "
                 >
-                  Sell Book
+                  <span className="block sm:hidden">Sell</span> 
+                  <span className="hidden sm:block">Sell Book</span>
                 </Link>
                 <Link
                   to="/messages"

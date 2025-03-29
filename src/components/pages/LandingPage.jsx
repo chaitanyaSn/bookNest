@@ -59,7 +59,7 @@ function LandingPage() {
             className="mt-12 flex justify-center gap-4"
           >
             {user ? (
-              <div className="flex flex-col gap-10 sm:flex-row gap-4">
+              <div className="flex flex-col gap-10 sm:flex-row ">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     to="/books"
